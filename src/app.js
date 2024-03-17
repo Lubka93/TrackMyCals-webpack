@@ -62,24 +62,23 @@ _addNewMeal(e) {
         let calorieInput = document.querySelector('#calorie-number');
 
         if (mealInput.value === '' && calorieInput.value === '') {
-            console.log(mealInput.value, typeof(mealInput.value), ' empty')
+           
          return   alert('Fill the input windows!');
            
           }
          else if (isNaN(calorieInput.value) )
           {
-            console.log(calorieInput.value, typeof(calorieInput.value), 'number')
+           
         return  alert('Calorie input should be a number')
             }
 
         else if (Number(calorieInput.value) < 0) {
-            console.log(Number(calorieInput.value), typeof(Number(calorieInput.value)), ' positive number')
+           
          return   alert('Calorie input should be a positive number')
-            console.log('After checking if calorie input is positive');
+          
         }
          else if (Number(calorieInput.value) > 0) {
-            console.log(Number(calorieInput.value), typeof(Number(calorieInput.value)), ' add cals')
-            console.log('After checking if calorie input is positive02');
+          
             const meal = new Meal(mealInput.value, Number.parseInt(calorieInput.value));
             this._tracker.addMeal(meal);
             this._tracker._addMealCard(mealInput.value, calorieInput.value, meal.id);
@@ -113,15 +112,15 @@ _addNewWorkouts(e) {
     return   alert('Fill the input windows!');   
       }
      else if (isNaN(Number.parseInt(calorieWorkoutINput.value)) )
-      {console.log(calorieWorkoutINput.value, typeof(calorieWorkoutINput.value), 'is not number')
+      {
         return  alert('Calorie input should be a number')
         }
     else if (Number(calorieWorkoutINput.value) < 0) {
-        console.log(calorieWorkoutINput.value, typeof(calorieWorkoutINput.value), 'is not a positive number')
+       
      return   alert('Calorie input should be a positive number')
     }
      else if (Number(calorieWorkoutINput.value) > 0) { 
-        console.log(calorieWorkoutINput.value, typeof(calorieWorkoutINput.value), 'is ok')
+   
     this._tracker.addWorkout(workout);
     this._tracker._addWorkoutCard(workoutInput.value, calorieWorkoutINput.value, workout.id );
     arr2.push(workout);
@@ -227,9 +226,7 @@ setLimit () {
     let limitDom = document.querySelector('#limit');
     let limitInput = document.querySelector('#limit-input');
     let limitLS = localStorage.getItem('limitInput');
-   // console.log(parseInt(limitInput.value), typeof(parseInt(limitInput.value)))
-     //this._tracker.setCalorieLimit(limitInput.value);
-
+   
      if (!limitInput.value) {
         // If the input is empty
         alert('Add number of calories!');
@@ -317,18 +314,15 @@ showSavedItems() {
     // Get the meal container and convert its children into an array
     let mealContainer = document.querySelector('#meal-wrapper');
     const mealsSArrDOM = [...mealContainer.children];
-    console.log(mealsSArrDOM);
     mealsSArrDOM.forEach(meal=>{
         let mealP = meal.querySelector('p');
         let mealText = mealP.innerHTML.trim().toLowerCase()
-        console.log(mealP.innerHTML);
         if((mealText.includes(filterInput))) {
     meal.style.display = 'block';
     meal.classList.remove('d-none');
     meal.classList.add('d-flex');
    
         } else {
-             console.log(mealP.innerHTML);
             meal.style.display = 'none';
             meal.classList.remove('d-flex');
             meal.classList.add('d-none');
