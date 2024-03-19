@@ -52,7 +52,7 @@ resetButton.addEventListener('click', this.resetAll.bind(this));
 
 
 _addNewMeal(e) {
-    e.preventDefault();
+   // e.preventDefault();
     if (!localStorage.getItem('MealsArr')) {
         localStorage.setItem('MealsArr', '[]');
     } else { 
@@ -66,22 +66,22 @@ _addNewMeal(e) {
          return   alert('Fill the input windows!');
            
           }
-         else if (isNaN(calorieInput.value) )
+         else if (isNaN(Math.round(calorieInput.value)) )
           {
            
         return  alert('Calorie input should be a number')
             }
 
-        else if (Number(calorieInput.value) < 0) {
+        else if (Math.round(calorieInput.value) < 0) {
            
          return   alert('Calorie input should be a positive number')
           
         }
-         else if (Number(calorieInput.value) > 0) {
+         else if (Math.round(calorieInput.value) > 0) {
           
-            const meal = new Meal(mealInput.value, Number.parseInt(calorieInput.value));
+            const meal = new Meal(mealInput.value, Math.round(calorieInput.value));
             this._tracker.addMeal(meal);
-            this._tracker._addMealCard(mealInput.value, calorieInput.value, meal.id);
+            this._tracker._addMealCard(mealInput.value, Math.round(calorieInput.value), meal.id);
             arr2.push(meal);
             localStorage.setItem('MealsArr', JSON.stringify(arr2));
             mealInput.value = '';
@@ -96,7 +96,7 @@ _addNewMeal(e) {
 
 
 _addNewWorkouts(e) {
-    e.preventDefault();
+  //  e.preventDefault();
     let workoutInput = document.querySelector('#workout-input');
     let calorieWorkoutINput = document.querySelector('#burned-cals-input');
 
@@ -106,23 +106,23 @@ _addNewWorkouts(e) {
     else {
         const arr = localStorage.getItem('WorkoutsArr');
         const arr2 = JSON.parse(arr);
-    const workout = new Workout(workoutInput.value, Number.parseInt((calorieWorkoutINput.value)));
+    const workout = new Workout(workoutInput.value, Math.round((calorieWorkoutINput.value)));
 
     if (workoutInput.value === '' || calorieWorkoutINput.value === '') {
     return   alert('Fill the input windows!');   
       }
-     else if (isNaN(Number.parseInt(calorieWorkoutINput.value)) )
+     else if (isNaN(Math.round(calorieWorkoutINput.value)) )
       {
         return  alert('Calorie input should be a number')
         }
-    else if (Number(calorieWorkoutINput.value) < 0) {
+    else if (Math.round(calorieWorkoutINput.value) < 0) {
        
      return   alert('Calorie input should be a positive number')
     }
-     else if (Number(calorieWorkoutINput.value) > 0) { 
+     else if (Math.round(calorieWorkoutINput.value) > 0) { 
    
     this._tracker.addWorkout(workout);
-    this._tracker._addWorkoutCard(workoutInput.value, calorieWorkoutINput.value, workout.id );
+    this._tracker._addWorkoutCard(workoutInput.value, Math.round(calorieWorkoutINput.value), workout.id );
     arr2.push(workout);
     localStorage.setItem('WorkoutsArr', JSON.stringify(arr2));
     workoutInput.value = '';
@@ -391,6 +391,8 @@ resetAll (e) {
   
 const workoutWrapper = document.querySelector('#workout-wrapper');
 const workoutArrDom = [...workoutWrapper.children];
+let mealFilterInput = document.querySelector('#filter-input');
+let workoutFilterInput = document.querySelector('#filter-workout-input');
 workoutArrDom.forEach(workout =>{
 workout.remove()
 })
@@ -400,6 +402,9 @@ const mealsArrDOM = [...mealWrapper.children]
 mealsArrDOM.forEach(meal => {
 meal.remove();
 })
+
+mealFilterInput.value = '';
+workoutFilterInput.value = '';
 
 this._tracker._totalCalorie = 0;
 this._tracker._calorieLimit = 2000;
