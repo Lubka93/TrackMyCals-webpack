@@ -230,10 +230,10 @@ setLimit () {
      if (!limitInput.value) {
         // If the input is empty
         alert('Add number of calories!');
-    } else if (isNaN(limitInput.value)) {
+    } else if (isNaN(Math.round(limitInput.value))) {
         // If the input is not a positive number
         alert('Input must be a number!');
-    } else if (Number(limitInput.value) <= 0) {
+    } else if (Math.round(limitInput.value) <= 0) {
         alert('Input must be a positive number!');
     }
 
@@ -242,8 +242,8 @@ setLimit () {
         this._tracker._calorieLimit = 2000;
     }
  else if (limitLS) { 
-    this._tracker.setCalorieLimit(limitInput.value);
-    this._tracker._calorieLimit = limitInput.value;
+    this._tracker.setCalorieLimit(Math.round(limitInput.value));
+    this._tracker._calorieLimit = Math.round(limitInput.value);
 
   
  }
