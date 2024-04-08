@@ -140,23 +140,29 @@ _showMeals () {
     const meals = localStorage.getItem('MealsArr');
     const arr = JSON.parse(meals);
    
+    if(arr.length !== 0) { 
     arr.forEach(card => { 
         this._tracker._addMealCard(card.name, card.calories, card.id)
     })
    this.showLimit ();
    this.showSavedItems();
    this._tracker._render();
+    }
 }
 
 _showWorkouts () {
 
     const workouts = localStorage.getItem('WorkoutsArr');
     const arr = JSON.parse(workouts);
+
+    if(arr.length !== 0) { 
     arr.forEach(card => { 
         this._tracker._addWorkoutCard(card.name, card.calories, card.id)
     })
+    this.showLimit ();
+    this.showSavedItems();
     this._tracker._render();
-   
+    }
 }
 
 _deleteMealsFromLS(cardId) {
