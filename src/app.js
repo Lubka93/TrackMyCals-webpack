@@ -138,8 +138,7 @@ _addNewWorkouts(e) {
 
 _showMeals () {
     const meals = localStorage.getItem('MealsArr');
-    const arr = JSON.parse(meals);
-   
+    const arr =  meals ? JSON.parse(meals) : [];
     if(arr.length !== 0) { 
     arr.forEach(card => { 
         this._tracker._addMealCard(card.name, card.calories, card.id)
@@ -153,7 +152,7 @@ _showMeals () {
 _showWorkouts () {
 
     const workouts = localStorage.getItem('WorkoutsArr');
-    const arr = JSON.parse(workouts);
+    const arr = workouts ? JSON.parse(workouts) : [];
 
     if(arr.length !== 0) { 
     arr.forEach(card => { 
