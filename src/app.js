@@ -6,6 +6,13 @@ import { Meal, Workout } from './ModuleClasses';
 
 class App {
 constructor () {
+console.log('blaaaaaaaaa')
+    if (!localStorage.getItem('MealsArr')) {
+        localStorage.setItem('MealsArr', JSON.stringify([]));
+    }
+    if (!localStorage.getItem('WorkoutsArr')) {
+        localStorage.setItem('WorkoutsArr', JSON.stringify([]));
+    }
 this._tracker = new Track();
 this.showSavedItems();
 
@@ -274,6 +281,14 @@ showLimit () {
 }
 
 showSavedItems() {
+    if (!localStorage.getItem('MealsArr')) {
+        localStorage.setItem('MealsArr', JSON.stringify([]));
+    }
+
+    if (!localStorage.getItem('WorkoutsArr')) {
+        localStorage.setItem('WorkoutsArr', JSON.stringify([]));
+    }
+
     let mealsFromLS = localStorage.getItem('MealsArr');
     let consumedCals = localStorage.getItem('consumedCals');
 
