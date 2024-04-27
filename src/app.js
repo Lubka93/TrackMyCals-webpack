@@ -282,11 +282,11 @@ showLimit () {
 
 showSavedItems() {
     if (!localStorage.getItem('MealsArr')) {
-        localStorage.setItem('MealsArr', '[]');
+        localStorage.setItem('MealsArr', JSON.stringify([]));
     }
 
     if (!localStorage.getItem('WorkoutsArr')) {
-        localStorage.setItem('WorkoutsArr', '[]');
+        localStorage.setItem('WorkoutsArr', JSON.stringify([]));
     }
 
     let mealsFromLS = localStorage.getItem('MealsArr');
