@@ -11,6 +11,7 @@ class Track {                   // tracker where to count calories and other stu
     
     //set calorie limit 
     setCalorieLimit(limit) {
+      
         this._calorieLimit = limit;
         localStorage.setItem('limitInput', limit);
     }
