@@ -6,7 +6,7 @@ import { Meal, Workout } from './ModuleClasses';
 
 class App {
 constructor () {
-console.log('blaaaaaaaaa')
+
     if (!localStorage.getItem('MealsArr')) {
         localStorage.setItem('MealsArr', JSON.stringify([]));
     }
@@ -58,17 +58,21 @@ resetButton.addEventListener('click', this.resetAll.bind(this));
 }
 
 
-_addNewMeal(e) {
+_addNewMeal() {
    // e.preventDefault();
     if (!localStorage.getItem('MealsArr')) {
-        localStorage.setItem('MealsArr', '[]');
+        if (mealInput.value.trim() === '' || calorieInput.value.trim() === '') {
+           
+       alert('Fill the input windows!') }
+       else{ 
+        localStorage.setItem('MealsArr', '[]'); }
     } else { 
         const arr = localStorage.getItem('MealsArr');
         const arr2 = JSON.parse(arr);
         let mealInput = document.querySelector('#meal-name');
         let calorieInput = document.querySelector('#calorie-number');
 
-        if (mealInput.value === '' && calorieInput.value === '') {
+        if (mealInput.value.trim() === '' || calorieInput.value.trim() === '') {
            
          return   alert('Fill the input windows!');
            
@@ -84,7 +88,7 @@ _addNewMeal(e) {
          return   alert('Calorie input should be a positive number')
           
         }
-         else if (Math.round(calorieInput.value) > 0) {
+         else if (Math.round(calorieInput.value) >= 0) {
           
             const meal = new Meal(mealInput.value, Math.round(calorieInput.value));
             this._tracker.addMeal(meal);
@@ -102,20 +106,24 @@ _addNewMeal(e) {
 }
 
 
-_addNewWorkouts(e) {
-  //  e.preventDefault();
+_addNewWorkouts() {
     let workoutInput = document.querySelector('#workout-input');
     let calorieWorkoutINput = document.querySelector('#burned-cals-input');
 
     if (!localStorage.getItem('WorkoutsArr')) {
+        if (workoutInput.value.trim() === '' || calorieWorkoutINput.value.trim() === '') {
+               alert('Fill the input windows!');   
+              }
+              else { 
         localStorage.setItem('WorkoutsArr', '[]');
+         }
     }
     else {
         const arr = localStorage.getItem('WorkoutsArr');
         const arr2 = JSON.parse(arr);
     const workout = new Workout(workoutInput.value, Math.round((calorieWorkoutINput.value)));
 
-    if (workoutInput.value === '' || calorieWorkoutINput.value === '') {
+    if (workoutInput.value.trim() === '' || calorieWorkoutINput.value.trim() === '') {
     return   alert('Fill the input windows!');   
       }
      else if (isNaN(Math.round(calorieWorkoutINput.value)) )
@@ -126,7 +134,7 @@ _addNewWorkouts(e) {
        
      return   alert('Calorie input should be a positive number')
     }
-     else if (Math.round(calorieWorkoutINput.value) > 0) { 
+     else if (Math.round(calorieWorkoutINput.value) >= 0) { 
    
     this._tracker.addWorkout(workout);
     this._tracker._addWorkoutCard(workoutInput.value, Math.round(calorieWorkoutINput.value), workout.id );
